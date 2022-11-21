@@ -90,8 +90,22 @@ b1 = [
 ] #board for testing
 
 
-test(b1,"ABCCED")
+test(b1,"ESECBA")
 test(b1,"SEE")
 test(b1,"ABCB",False)
+
+#driver code to get inputs
+inputboard = []
+inputword = "filler text"
+#assume input ends when "word" is entered
+#word is a line with no space
+sol = Solution()
+while(' ' in inputword):
+    inputword = input()
+    if (' ' in inputword):
+        inputboard.append(inputword.split(' '))
+    else:
+        print(sol.canconstword(inputboard,inputword))
+
 
       
