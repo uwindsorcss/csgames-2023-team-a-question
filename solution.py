@@ -31,6 +31,7 @@ and if main was empty we know that the entire keyword matches
 and if we get to a point that there is no match we can simply reconstruct the keyword by transfering back the characters from the 
 second stack to the first stack 
 we can also create a function that does this stack transfer for simplicity and لاتی reasons 
+use try / except for exception handling 
 '''
 def identifier(mtx , wrd , wrd_stack) :
     
