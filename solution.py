@@ -24,7 +24,14 @@ def get_input():
 def find_first_char():
     return None 
 
-
+'''just an idea
+aybe we need 2 stacks so we can keep track of the index of the keyword that has been found 
+and so if we find any char that matches we addd that char to the second stack and remove that char from our main stack, 
+and if main was empty we know that the entire keyword matches 
+and if we get to a point that there is no match we can simply reconstruct the keyword by transfering back the characters from the 
+second stack to the first stack 
+we can also create a function that does this stack transfer for simplicity and لاتی reasons 
+'''
 def identifier(mtx , wrd , wrd_stack) :
     
     #if  (not find_first_char()):
