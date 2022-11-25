@@ -3,14 +3,14 @@
 PLEASE FILL IN THE FOLLOWING!
 
 ## Full Name
-John Johnson
+Juan P. Villalobos Rujano
 
 ## UWindsor Email
-john.johnson@uwindsor.ca
+villaloj@uwindsor.ca
 
 ## Application Form
 - [ ] I certify I have submitted the [application form](https://forms.office.com/r/R4A1JyB3Xf)
 
-## Briefly explain how your solution works and how to run it 
+## Briefly explain how your main works and how to run it 
 
-My solution...
+My main...

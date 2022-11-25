@@ -9,11 +9,11 @@ Be sure to also complete the [application form](https://forms.office.com/r/R4A1J
 
 # Grading
 
-Your solutions will be tested with many test cases. We will look at algorithm correctness against these test cases as well as time complexity when assessing your solution.
+Your solutions will be tested with many main cases. We will look at algorithm correctness against these main cases as well as time complexity when assessing your main.
 
 # Submitting
 
-Fork this repository to your personal account, then push your solutions to your fork on the master branch. You may use any programming language of your choosing. Please save the file that we should run as a file named `solution` (e.g. `solution.py`, `solution.c`).
+Fork this repository to your personal account, then push your solutions to your fork on the master branch. You may use any programming language of your choosing. Please save the file that we should run as a file named `main` (e.g. `main.py`, `main.c`).
 
 Next, **create a pull request** to lock in your submission, **explaining how your program works and how to run it**.
 
@@ -25,7 +25,7 @@ The word can be constructed from letters of sequentially adjacent cell, where "a
 
 ### Example:
 ```
-board =
+Board =
 [
   ['A','B','C','E'],
   ['S','F','C','S'],
@@ -41,8 +41,8 @@ Given word = "ABCB", return false.
 
 
 ### Input:
-1) `board` - 2D array of characters
-2) `word` - String word that you are looking for in the board
+1) `Board` - 2D array of characters
+2) `word` - String word that you are looking for in the Board
 
 Assume inputs are separated by spaces and new lines. So for Team A it will look like:
 ```
@@ -55,4 +55,4 @@ word
 
 
 ### Output:
-Boolean value representing whether the word can be found (true) in the board or not (false). Your function should return this value.
+Boolean value representing whether the word can be found (true) in the Board or not (false). Your function should return this value.
