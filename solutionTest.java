@@ -102,4 +102,13 @@ class solutionTest {
         String word = "AR";
         assertTrue(main.solution(word, a));
     }
+
+    @Test
+    void test11() {
+        char[][] a = {{'A','F','U','S'},
+                {'D','U','Y','I'},
+                {'F','N','M','P'}};
+        String word = "FUN";
+        assertTrue(main.solution(word, a));
+    }
 }
