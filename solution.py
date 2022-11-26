@@ -31,7 +31,26 @@ and if main was empty we know that the entire keyword matches
 and if we get to a point that there is no match we can simply reconstruct the keyword by transfering back the characters from the 
 second stack to the first stack 
 we can also create a function that does this stack transfer for simplicity and لاتی reasons 
+[]use try else  to o around exceptions 
 '''
+
+"""he said i should be able to get the n*m of the input first 
+then create another 2D array same with size n*m ( same size as original) __
+and the values that it holds are just true and false and they are corresponding to the 
+attribute "visited_before" of each index of the original matrix. 
+this matrix will help me make sure that i dont visit the same character
+
+
+he was supportive of the 2 stack idea 
+but he said after i made it work i could possibly try to apply it using recursion 
+
+also for out of bound : 
+he said the try / except is okay but the regular way of doing this 
+is that first of all o need the size of the original (n*m) and then when ever 
+i wanna move to the right for example (add (0,1)) then i check that future index will be less than n so i wouldnt go out of the lenght 
+if i wanna move to the top for example (add (1,0)) then i check the future index will be less than m .
+"""
+
 def identifier(mtx , wrd , wrd_stack) :
     
     #if  (not find_first_char()):
