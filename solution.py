@@ -1,4 +1,37 @@
 
+'''just an idea
+aybe we need 2 stacks so we can keep track of the index of the keyword that has been found 
+and so if we find any char that matches we addd that char to the second stack and remove that char from our main stack, 
+and if main was empty we know that the entire keyword matches 
+and if we get to a point that there is no match we can simply reconstruct the keyword by transfering back the characters from the 
+second stack to the first stack 
+we can also create a function that does this stack transfer for simplicity and لاتی reasons 
+use try / except for exception handling 
+'''
+
+'''Talk with mohammad
+he said i should be able to get the n*m of the input first 
+then create another 2D array same with size n*m ( same size as original) __
+and the values that it holds are just true and false and they are corresponding to the 
+attribute "visited_before" of each index of the original matrix. 
+this matrix will help me make sure that i dont visit the same character
+
+
+he was supportive of the 2 stack idea 
+but he said after i made it work i could possibly try to apply it using recursion 
+
+also for out of bound : 
+he said the try / except is okay but the regular way of doing this 
+is that first of all o need the size of the original (n*m) and then when ever 
+i wanna move to the right for example (add (0,1)) then i check that future index will be less than n so i wouldnt go out of the lenght 
+if i wanna move to the top for example (add (1,0)) then i check the future index will be less than m .'''
+
+
+#this function will help us find the first character using devide and conqour method 
+# so the first iteration is as fast as possible 
+import numpy as np 
+
+#this function gets the input and store them linearly
 def get_input():
     
      
@@ -19,68 +52,74 @@ def get_input():
     #print(line)
     return line  
 
-#this function will help us find the first character using devide and conqour method 
-# so the first iteration is as fast as possible 
+#this function returns the deimension of the matrix 
+def get_size(matrix): 
+    lst = [0,0] #initializing the lst of dimentions 
+
+    lst[0] = len(matrix) # rows = n  
+    lst[1] = len(matrix[0]) # cols = m
+
+    return lst  
+
+#this function create a matrix with dimensions of the 
+#original matrix and initializes each index with False
+def create_bool_mtx(dim): 
+
+    bool_mtx = np.zeros((dim[0],dim[1]),dtype=bool)
+    #print(bool_mtx)
+    return bool_mtx 
+
 def find_first_char():
     return None 
 
-'''just an idea
-aybe we need 2 stacks so we can keep track of the index of the keyword that has been found 
-and so if we find any char that matches we addd that char to the second stack and remove that char from our main stack, 
-and if main was empty we know that the entire keyword matches 
-and if we get to a point that there is no match we can simply reconstruct the keyword by transfering back the characters from the 
-second stack to the first stack 
-we can also create a function that does this stack transfer for simplicity and لاتی reasons 
-use try / except for exception handling 
-'''
 
-"""
-Talk with mohammad
-he said i should be able to get the n*m of the input first 
-then create another 2D array same with size n*m ( same size as original) __
-and the values that it holds are just true and false and they are corresponding to the 
-attribute "visited_before" of each index of the original matrix. 
-this matrix will help me make sure that i dont visit the same character
-
-
-he was supportive of the 2 stack idea 
-but he said after i made it work i could possibly try to apply it using recursion 
-
-also for out of bound : 
-he said the try / except is okay but the regular way of doing this 
-is that first of all o need the size of the original (n*m) and then when ever 
-i wanna move to the right for example (add (0,1)) then i check that future index will be less than n so i wouldnt go out of the lenght 
-if i wanna move to the top for example (add (1,0)) then i check the future index will be less than m .
-"""
-
-def identifier(mtx , wrd , wrd_stack) :
+#this function takes 4 variables: 1.Matrix , 2.Boolean_matrix , 3. keyWord, 4. mtx dimensions 
+# To be implemented .. 
+def Scavenger(mtx , bool_mtx ,  wrd , dim) :
+    
+    #wrd_stack = list(wrd) #lst of characters of keyword
+    #print("The KeyWord_Stack is:", wrd_stack)
     
     #if  (not find_first_char()):
         #return False
     #else : 
     
-    #while True: 
+        #while True: 
         # look_left() 
         #...
 
     return None
 
+
+
 if __name__ == '__main__' : 
+
+    #Instructions 
+    print("  ================ WELCOME ================")
+    print(f"- Enter each row of matrix and then press 'Enter', \n"
+    "- When you are done inputting the matrix , press 'Enter' once more.\n"
+    "- Then you can input the keyword that you'd like to search for!\n Go! === > ")
+
 
     # Get the Input, Seperate the Matrix and the KeyWord 
     mtx = get_input() #mtx represents matrix 
-    wrd =  mtx.pop(-1) # wrd represents keyword 
-    wrd_stack = list(wrd) #lst of characters of keyword 
-    
+    wrd =  mtx.pop(-1) # wrd represents keyword  
+    dim = get_size(mtx) #an array holding the dimensions of mtx
+    bool_mtx = create_bool_mtx(dim)
+
     #print statements  
+    print("  ============== PROCCESSING ==============")
     print("The Matrix is:", mtx)
     print("The KeyWord is:", wrd)
-    print("The KeyWord_Stack is:", wrd_stack)
+    print(f"Dimentions n = {dim[0]}, m = {dim[1]}")
 
     
-    #call the identifier function
-    result = identifier()
-    print(result)
+    #Scavenger() returns True or False 
+    # depending of the presence of the keyword in mtx   
+    #result = Scavenger()
+    
+
+    exit 
     
 
 
