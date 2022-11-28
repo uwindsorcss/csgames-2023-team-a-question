@@ -33,8 +33,6 @@ import numpy as np
 
 #this function gets the input and store them linearly
 def get_input():
-    
-     
     line = [] 
     
     while True:
@@ -54,28 +52,29 @@ def get_input():
 
 #this function returns the deimension of the matrix 
 def get_size(matrix): 
-    lst = [0,0] #initializing the lst of dimentions 
-
-    lst[0] = len(matrix) # rows = n  
-    lst[1] = len(matrix[0]) # cols = m
-
-    return lst  
+    return len(matrix) , len(matrix[0])  
 
 #this function create a matrix with dimensions of the 
 #original matrix and initializes each index with False
-def create_bool_mtx(dim): 
+def create_bool_mtx(n , m): 
 
-    bool_mtx = np.zeros((dim[0],dim[1]),dtype=bool)
+    bool_mtx = np.zeros((n ,m),dtype=bool)
     #print(bool_mtx)
     return bool_mtx 
 
-def find_first_char():
-    return None 
+
+#the function that calls the scavenger 
+# checks to see if the board and input are valid  to pass to scavenger 
+# if everything is good , calls scavenger for every index of the matrix 
+def identifier (mtx, wrd) :
+
+
+    return None
 
 
 #this function takes 4 variables: 1.Matrix , 2.Boolean_matrix , 3. keyWord, 4. mtx dimensions 
 # To be implemented .. 
-def Scavenger(mtx , bool_mtx ,  wrd , dim) :
+def Scavenger(mtx, bool_mtx, wrd, matched) :
     
     #wrd_stack = list(wrd) #lst of characters of keyword
     #print("The KeyWord_Stack is:", wrd_stack)
@@ -104,14 +103,18 @@ if __name__ == '__main__' :
     # Get the Input, Seperate the Matrix and the KeyWord 
     mtx = get_input() #mtx represents matrix 
     wrd =  mtx.pop(-1) # wrd represents keyword  
-    dim = get_size(mtx) #an array holding the dimensions of mtx
-    bool_mtx = create_bool_mtx(dim)
+
+    # we get the n, m to create the boolean function
+    n , m  = get_size(mtx) #an array holding the dimensions of mtx
+    bool_mtx = create_bool_mtx(n,m)
+
+
 
     #print statements  
     print("  ============== PROCCESSING ==============")
     print("The Matrix is:", mtx)
     print("The KeyWord is:", wrd)
-    print(f"Dimentions n = {dim[0]}, m = {dim[1]}")
+    print(f"Dimentions n = {n}, m = {m}")
 
     
     #Scavenger() returns True or False 
