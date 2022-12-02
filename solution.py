@@ -51,16 +51,16 @@ if __name__ == '__main__':
     # word
     # ```
 
-    board = []
-    word = None
-    while (True):
-        line = input().split(" ")
-        if (len(line) == 1):
-            word = line[0]
-            break
-        board.append(line)
+    board = [["A","A","A","A","A","A"],["A","A","A","A","A","A"],["A","A","A","A","A","A"],["A","A","A","A","A","A"],["A","A","A","A","A","B"],["A","A","A","A","A","A"]]
+    word = "AAAAAAAAAAAAAAB"
+    # while (True):
+    #     line = input().split(" ")
+    #     if (len(line) == 1):
+    #         word = line[0]
+    #         break
+    #     board.append(line)
 
-    print(board)
-    print(word)
+    # print(board)
+    # print(word)
 
     print(exist(board, word))
