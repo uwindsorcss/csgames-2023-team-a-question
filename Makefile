@@ -5,7 +5,7 @@ build:
 	g++ -o solution solution.cpp -Wall -Wextra
 
 run: build
-	/usr/bin/time -v ./solution < sample_input.txt
+	/usr/bin/time -v ./solution
 
 clean:
 	rm -f solution

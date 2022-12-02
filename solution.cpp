@@ -27,33 +27,32 @@ bool dfs(set<pairs> &points, string s, map<pairs, char> &board, set<pairs> &path
     // cout << s << ' ';
     // for (auto it = points.begin(); it != points.end(); it++)
     // {
-    //     cout << '(' << it->first << ',' << it->second << ") ";
+    //     cout << '(' << it.first << ',' << it.second << ") ";
     // }
     // cout << endl;
     if (s.length() == 0)
         return true;
-    for (auto it = points.begin(); it != points.end(); it++)
+    for (auto it : points)
     {
-        // cout << "checking " << it->first << ',' << it->second << " '" << board[*it] << endl;
-        if (board[*it] == s[0])
+        // cout << "checking " << it.first << ',' << it.second << " '" << board[it] << endl;
+        if (board[it] == s[0])
         {
-            path.insert(*it);
+            path.insert(it);
             // find all points that are adjacent to it LRUD
             set<pairs> adj;
-            adj.insert(pairs(it->first - 1, it->second));
-            adj.insert(pairs(it->first + 1, it->second));
-            adj.insert(pairs(it->first, it->second - 1));
-            adj.insert(pairs(it->first, it->second + 1));
-            // find the intersection of adj and all possible points on the board
+            adj.insert(pairs(it.first - 1, it.second));
+            adj.insert(pairs(it.first + 1, it.second));
+            adj.insert(pairs(it.first, it.second - 1));
+            adj.insert(pairs(it.first, it.second + 1));
+            // remove adjacent points that are not on the board
             set<pairs> intersection;
-            // get the keyset of board
             set_intersection(adj.begin(), adj.end(), boardKeys.begin(), boardKeys.end(), inserter(intersection, intersection.begin()));
             // remove the points that are already in the path
             set<pairs> new_points;
             set_difference(intersection.begin(), intersection.end(), path.begin(), path.end(), inserter(new_points, new_points.begin()));
             if (dfs(new_points, s.substr(1), board, path, boardKeys))
                 return true;
-            path.erase(*it);
+            path.erase(it);
         }
     }
     return false;
@@ -61,10 +60,14 @@ bool dfs(set<pairs> &points, string s, map<pairs, char> &board, set<pairs> &path
 
 bool exist(vector<vector<char>> &board, string word)
 {
-    set<pairs> points;
-    set<pairs> boardKeys;
-    map<pairs, char> board_map;
-    map<char, int> board_char_count;
+    // reverse the word
+    string rword = word;
+    reverse(rword.begin(), rword.end());
+
+    set<pairs> points;               // points to check for the next move
+    set<pairs> boardKeys;            // keys of the board, for checking for valid adjacent points
+    map<pairs, char> board_map;      // coordinate -> char map of the board
+    map<char, int> board_char_count; // char -> count map of the board
     for (uint i = 0; i < board.size(); i++)
     {
         for (uint j = 0; j < board[i].size(); j++)
@@ -98,6 +101,10 @@ bool exist(vector<vector<char>> &board, string word)
             return false;
     }
 
+    // use word if the first character has less occurences than the reverse of the word
+    if (board_char_count[word[0]] > board_char_count[rword[0]])
+        word = rword;
+
     return dfs(points, word, board_map, path, boardKeys);
 }
 
@@ -119,10 +126,10 @@ int main(void)
                                   {'A', 'A', 'A', 'A', 'A', 'A'},
                                   {'A', 'A', 'A', 'A', 'A', 'A'},
                                   {'A', 'A', 'A', 'A', 'A', 'A'},
-                                  {'A', 'A', 'A', 'A', 'A', 'A'},
-                                  {'A', 'A', 'A', 'A', 'A', 'A'}};
+                                  {'A', 'A', 'A', 'A', 'A', 'B'},
+                                  {'A', 'A', 'A', 'A', 'B', 'A'}};
 
-    string word = "AAAAAAAAAAAAAAB";
+    string word = "AAAAAAAAAAAAABB";
 
     // print the board and word
     cout << "Board:" << endl;
