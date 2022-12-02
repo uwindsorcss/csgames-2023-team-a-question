@@ -30,6 +30,15 @@ def exist(board: list[list[str]], word: str) -> bool:
     board = {(x, y): board[x][y] for x, y in product(
         range(len(board)), range(len(board[0])))}
 
+    # if any char in the word is not in the board, return False
+    if not set(word).issubset(set(board.values())): 
+        return False
+
+    # if there are less occurences of the last character than the first character, reverse the word
+    boardstr = ''.join(board.values())
+    if boardstr.count(word[0]) > boardstr.count(word[-1]):
+        word = word[::-1]
+
     # you take the input, and see if for each character, you can follow a path from character to character. The same character cannot be used more than once
     return search(
         set(board.keys()),
@@ -51,16 +60,8 @@ if __name__ == '__main__':
     # word
     # ```
 
-    board = [["A","A","A","A","A","A"],["A","A","A","A","A","A"],["A","A","A","A","A","A"],["A","A","A","A","A","A"],["A","A","A","A","A","B"],["A","A","A","A","A","A"]]
-    word = "AAAAAAAAAAAAAAB"
-    # while (True):
-    #     line = input().split(" ")
-    #     if (len(line) == 1):
-    #         word = line[0]
-    #         break
-    #     board.append(line)
-
-    # print(board)
-    # print(word)
+    board = [["A", "A", "A", "A", "A", "A"], ["A", "A", "A", "A", "A", "A"], ["A", "A", "A", "A", "A", "A"], [
+        "A", "A", "A", "A", "A", "A"], ["A", "A", "A", "A", "A", "B"], ["A", "A", "A", "A", "B", "A"]]
+    word = "AAAAAAAAAAAAABB"
 
     print(exist(board, word))
