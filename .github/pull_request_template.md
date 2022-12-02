@@ -10,7 +10,7 @@ Cole Fuerth
 
 ## UWindsor Email
 
-fuert11g@uwindsor.ca
+[fuert11g@uwindsor.ca](mailto:fuert11g@uwindsor.ca)
 
 ## Application Form
 
@@ -18,8 +18,15 @@ fuert11g@uwindsor.ca
 
 ## Briefly explain how your solution works and how to run it 
 
-My solution uses dfs to find the result. The first recursive call to `search()` includes the entire array as the possible set of starting points. For each call to `search()`, it trims the list to the points that match the first character of the word, then generates a valid list of adjacent points that have not been visited yet, and makes a recursive call to `search()` with the adjacent points, the word with the current character popped off, and the updated points visited so far.
+### Brief
 
-On **leetcode** (how I assume you are testing), this solution uses python3. You copy the body of the evaluate() function into exist() in leetcode, and copy my `import`s and `search()` function to the top of the script.
+I first developed my solution in Python, then remade it in C++ for speed. **I would prefer the C++ solution to be considered, since it is considerably faster**, but it should still be noted that the Python solution came first, and runs almost as fast. The Python is also (understandably) much easier to read and understand, since the solutions are very much the same algorithmically.
+### How it works
 
-**Locally**, I am testing using `python3 solution.py < sample_input.txt`, where sample_input.txt contains the input. Input is read in on `stdin`, the way it is formatted in the problem statement.
+My solution first tries to find exceptional cases that clearly will not fit first, then picks the better order of characters of the word (reversing the word will not change whether it fits the puzzle, and the order with the least starting points runs exponentially faster). Once it is known all the characters in the string appear on the board frequent enough to potentially fit, and that we have the optimal order of characters, a **depth first** approach is employed. Using sets to keep track of points, the board, and history, we can keep track of everything using set operations. `dfs` exhaustively tries all possible paths for the string, until eventually either fitting or exhausting all possibilities.
+
+### Running the code
+
+On **leetcode** (how I assume you are testing), you can copy and paste either of the solutions that are found under the **leetcode** folder directly onto the site. The C++ solution is in the top 1.5% of submissions; the Python solution is in the top 10% for runtime.
+
+**Locally**, I am testing using `make` with the provided Makefile, or `python3 solution.py`. The test case is hard coded into `main` on each of the source files in the root directory.
