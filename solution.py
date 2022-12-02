@@ -39,7 +39,6 @@ def exist(board: list[list[str]], word: str) -> bool:
     if boardstr.count(word[0]) > boardstr.count(word[-1]):
         word = word[::-1]
 
-    # you take the input, and see if for each character, you can follow a path from character to character. The same character cannot be used more than once
     return search(
         set(board.keys()),
         word,
