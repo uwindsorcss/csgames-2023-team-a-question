@@ -45,6 +45,8 @@ class Board:
             # None of this node's neighbours led to the word. Make this node unvisited again since we are backtracking
             # out of it
             self._board[r][c] = old_char
+            if self._show_trace:
+                print(f'Backtracking...\t  Word thus far: {word[0:i]}')
         return False
 
     def _is_unvisited_neighbour(self, r, c):
