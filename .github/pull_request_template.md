@@ -1,4 +1,4 @@
-# CS Games 2023 Team B Application
+# CS Games 2023 Team A Application
 
 PLEASE FILL IN THE FOLLOWING!
 
