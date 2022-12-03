@@ -13,6 +13,8 @@ class Board:
         self._show_trace = show_trace
 
     def can_construct_word(self, word):
+        # Reverse the word if it will make the algorithm more efficient
+        word = self._maybe_reverse_word(word)
         # Iterate over each node, and call _dfs_construct_word when the first letter of word is found
         for r in range(len(self._board)):
             for c in range(len(self._board[r])):
@@ -55,6 +57,21 @@ class Board:
             (0 <= c < len(self._board[r])) and
             (self._board[r][c] != 0)
         )
+
+    # Compares the prefix and suffix of word and finds out whether reversing the word will make the algorithm more
+    # efficient.
+    def _maybe_reverse_word(self, word):
+        letter_freq = [0] * len(word)
+        for r in range(len(self._board)):
+            for c in range(len(self._board[r])):
+                for l in range(len(word)):
+                    if self._board[r][c] == word[l]:
+                        letter_freq[l] += 1
+        for i in range(len(letter_freq) // 2):
+            if letter_freq[len(letter_freq) - i - 1] == letter_freq[i]:
+                continue
+            return word if letter_freq[i] < letter_freq[len(letter_freq) - i - 1] else word[::-1]
+        return word
 
 
 def read_input():
