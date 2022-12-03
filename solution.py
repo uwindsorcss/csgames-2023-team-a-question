@@ -1,9 +1,7 @@
 import sys
 
-
-def try_add_unvisited_neighbour(unvisited_neighbours, coords, visited_set):
-    if coords not in visited_set:
-        unvisited_neighbours.append(coords)
+dr = [-1, 0, 1, 0]  # Row change for neighbours UP, RIGHT, DOWN, and LEFT
+dc = [0, 1, 0, -1]  # Column change for neighbours UP, RIGHT, DOWN, and LEFT
 
 
 class Board:
@@ -18,45 +16,43 @@ class Board:
         # Iterate over each node, and call _dfs_construct_word when the first letter of word is found
         for r in range(len(self._board)):
             for c in range(len(self._board[r])):
-                if self._board[r][c] == word[0]:
-                    if self._dfs_construct_word(word, r, c, 0, set()):
-                        return True
+                if self._dfs_construct_word(word, r, c, 0):
+                    return True
         return False
 
-    def _dfs_construct_word(self, word, r, c, i, visited_set):
-
+    def _dfs_construct_word(self, word, r, c, i):
+        # Note that if a cell in the board is visited (i.e., set to 0), this if statement will not be entered
         if word[i] == self._board[r][c]:
             if self._show_trace:
-                print(f'Found {word[i]} at ({r},{c}). Word thus far: {word[0:i + 1]}')
+                print(f'Found {word[i]} at ({r},{c}). Word thus far: {word[0:i+1]}')
 
-            if i == len(word) - 1:
+            if i == len(word)-1:
                 return True
 
             # Otherwise, the search continues. Mark this node as visited
-            visited_set.add((r, c))
+            old_char = self._board[r][c]
+            self._board[r][c] = 0
 
             # Perform DFS on the unvisited neighbour nodes
-            for (rn, cn) in self._get_unvisited_neighbours(r, c, visited_set):
+            for neighbour_num in range(4):
+                neighbour_row = r+dr[neighbour_num]
+                neighbour_col = c+dc[neighbour_num]
                 # If one of the neighbours led to the finished word, break out and return true
-                if self._dfs_construct_word(word, rn, cn, i + 1, visited_set):
+                if (self._is_unvisited_neighbour(neighbour_row, neighbour_col) and
+                        self._dfs_construct_word(word, neighbour_row, neighbour_col, i+1)):
                     return True
 
             # None of this node's neighbours led to the word. Make this node unvisited again since we are backtracking
             # out of it
-            visited_set.remove((r, c))
+            self._board[r][c] = old_char
         return False
 
-    def _get_unvisited_neighbours(self, r, c, visited_set):
-        unvisited_neighbours = []
-        if r > 0:
-            try_add_unvisited_neighbour(unvisited_neighbours, (r - 1, c), visited_set)
-        if r < len(self._board) - 1:
-            try_add_unvisited_neighbour(unvisited_neighbours, (r + 1, c), visited_set)
-        if c > 0:
-            try_add_unvisited_neighbour(unvisited_neighbours, (r, c - 1), visited_set)
-        if c < len(self._board[r]) - 1:
-            try_add_unvisited_neighbour(unvisited_neighbours, (r, c + 1), visited_set)
-        return unvisited_neighbours
+    def _is_unvisited_neighbour(self, r, c):
+        return (
+            (0 <= r < len(self._board)) and
+            (0 <= c < len(self._board[r])) and
+            (self._board[r][c] != 0)
+        )
 
 
 def read_input():
