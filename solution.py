@@ -14,7 +14,9 @@ class Board:
 
     def can_construct_word(self, word):
         # Reverse the word if it will make the algorithm more efficient
-        word = self._maybe_reverse_word(word)
+        word = self._get_equivalent_search_word(word)
+        if word is None:    # i.e., a letter in the word does not exist anywhere in the grid
+            return False
         # Iterate over each node, and call _dfs_construct_word when the first letter of word is found
         for r in range(len(self._board)):
             for c in range(len(self._board[r])):
@@ -60,13 +62,22 @@ class Board:
 
     # Compares the prefix and suffix of word and finds out whether reversing the word will make the algorithm more
     # efficient.
-    def _maybe_reverse_word(self, word):
+    def _get_equivalent_search_word(self, word):
+        # Get the frequency of each letter from word in the board
         letter_freq = [0] * len(word)
         for r in range(len(self._board)):
             for c in range(len(self._board[r])):
                 for l in range(len(word)):
                     if self._board[r][c] == word[l]:
                         letter_freq[l] += 1
+        # If a letter does not show up in the board, return None so the algorithm doesn't search for the word at all
+        if 0 in letter_freq:
+            if self._show_trace:
+                print('A letter from the word does not exist in the board!')
+            return None
+        # Otherwise, iterate from both ends of the list and compare the two values at each iterator at each step. If the
+        # first discrepancy in frequencies is such that the later letter is less frequent, then return the reversed
+        # word. Otherwise, return word.
         for i in range(len(letter_freq) // 2):
             if letter_freq[len(letter_freq) - i - 1] == letter_freq[i]:
                 continue
